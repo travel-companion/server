@@ -1,7 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import WriteTocloudFirestore from '../componenents/fireStore/write'
-import ReadFromcloudFirestore from '../componenents/fireStore/read'
+import AddStops from '../componenents/fireStore/AddStops'
+import UsersManagment from '../componenents/fireStore/UsersManagment'
+import AddCity from '../componenents/fireStore/AddCity'
+import AddLine from '../componenents/fireStore/AddLine'
+import ChatRoom from '../componenents/fireStore/chatRoom'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -10,8 +13,13 @@ export default function Home() {
         <meta name='description' content='admin Travel Compagnion ' />
       </Head>
       <h1>Welcome to Next</h1>
-      <WriteTocloudFirestore/>
-      <ReadFromcloudFirestore/>
+      <AddStops/>
+      <AddCity/>
+      <AddLine/>
+      <ChatRoom/>
+      <h2>users</h2>
+      <UsersManagment/>
+
     </div>
   )
 }
