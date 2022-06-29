@@ -1,46 +1,145 @@
-import React,{useEffect,useState} from 'react'
-import { collection, query, where, doc, getDoc,getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from 'react'
+import { collection, query, doc, updateDoc, getDocs } from "firebase/firestore";
 
 import { db } from '../../firebase/initFirebase';
 function UsersManagment() {
-    const [users,setUsers]=useState([]);
-    
-    useEffect(()=>{
-        getAll()
-    },[])
+    const [users, setUsers] = useState([]);
+    const [update,setUpdate]=useState(false)
+    useEffect(() => {
+        getAll();
+    }, [update])
 
-    const getOne = async () => {
-        try {
-            const docRef = doc(db, "users","WtyPseuSNBr240jePTR2");
-            getDoc(docRef).then(res => console.log(res))
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+
     const getAll = async () => {
         try {
+
             const q = query(collection(db, "users"));
             const querySnapshot = await getDocs(q);
+            var arr = []
             querySnapshot.forEach((doc) => {
-                setUsers([...users,{id:doc.id,data:doc.data()}])
+                if (!doc.data().city) {
+                    arr.push({ data: doc.data(), id: doc.id })
+                }
+                setUsers(arr);
             });
         } catch (error) {
             console.log(error);
         }
     }
+
+
+    const neutral=(id)=>{
+        const user = doc(db, 'users', id);
+        updateDoc(user, { state: "neutral" });
+        setUpdate(!update)
+    }
+    const ban=(id)=>{
+        const user = doc(db, 'users', id);
+        updateDoc(user, { state: "banned" });
+        setUpdate(!update)
+    }
+    const mute=(id)=>{
+        const user = doc(db, 'users', id);
+        updateDoc(user, { state: "muted" });
+        setUpdate(!update)
+    }
+
+
+
     return (
         <div>
-            {console.log(users)}
-            <button onClick={getOne}>getOne</button>
-            <button onClick={getAll}>getAll</button>
+            <table style={{ border: 'solid 1px black' }}>
+                <thead>
+                    <tr> 
+                            <th
+                                style={{
+                                    borderBottom: 'solid 3px red',
+                                    color: 'black',
+                                }}
+                            >
+                                id
+                            </th>
+                            <th
+                                style={{
+                                    borderBottom: 'solid 3px red',
+                                    color: 'black',
+                                }}
+                            >
+                                name
+                            </th>
+                            <th
+                                style={{
+                                    borderBottom: 'solid 3px red',
+                                    color: 'black',
+                                }}
+                            >
+                                role
+                            </th>
+                            <th
+                                style={{
+                                    borderBottom: 'solid 3px red',
+                                    color: 'black',
+                                }}
+                            >
+                                state
+                            </th>
+                     </tr>
+                </thead>
+                <tbody>
+                   {users.map((e,i)=>{
+                    return(
+                        <tr key={i}> 
+                        <td
+                            style={{
+                                padding: '10px',
+                                border: 'solid 1px gray',
+                            }}
+                        >
+                            {e.id}
+                        </td>
+                        <td
+                            style={{
+                                padding: '10px',
+                                border: 'solid 1px gray',
+                            }}
+                        >
+                            {e.data.userName}
+                        </td>
+                        <td
+                            style={{
+                                padding: '10px',
+                                border: 'solid 1px gray',
+                            }}
+                        >
+                            {e.data.role}
+                        </td>
+                        <td
+                            style={{
+                                padding: '10px',
+                                border: 'solid 1px gray',
+                            }}
+                        >
+                            {e.data.state}
+                        </td>
+                        <td
+                            style={{
+                                padding: '10px',
+                                border: 'solid 1px gray',
+                            }}
+                        >
+                            {!(e.data.state==="banned")?
+                            <button onClick={()=>{ban(e.id)}}>ban</button>:
+                            <button onClick={()=>{neutral(e.id)}}>deban</button>} 
+                            {!(e.data.state==="muted")?
+                            <button onClick={()=>{mute(e.id)}}>mute</button>:
+                            <button onClick={()=>{neutral(e.id)}}>demute</button>}
 
+                        </td>
+                    </tr>
+                    )
+                   })}
+                </tbody>
+            </table>
         </div>
     )
 }
