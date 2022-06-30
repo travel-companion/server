@@ -17,9 +17,7 @@ function UsersManagment() {
             const querySnapshot = await getDocs(q);
             var arr = []
             querySnapshot.forEach((doc) => {
-                if (!doc.data().city) {
                     arr.push({ data: doc.data(), id: doc.id })
-                }
                 setUsers(arr);
             });
         } catch (error) {
