@@ -5,6 +5,7 @@ import UsersManagment from '../componenents/fireStore/UsersManagment'
 import AddCity from '../componenents/fireStore/AddCity'
 import AddLine from '../componenents/fireStore/AddLine'
 import ChatRoom from '../componenents/fireStore/chatRoom'
+import Posts from '../componenents/fireStore/Posts'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -19,7 +20,7 @@ export default function Home() {
       <ChatRoom/>
       <h2>users</h2>
       <UsersManagment/>
-
+      <Posts/>
     </div>
   )
 }
