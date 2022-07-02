@@ -7,6 +7,8 @@ import AddLine from '../componenents/fireStore/AddLine'
 import ChatRoom from '../componenents/fireStore/chatRoom'
 import Posts from '../componenents/fireStore/Posts'
 import SideBar from '../componenents/SideBar'
+import Layout from '../componenents/Layout'
+import Link from 'next/link'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -25,16 +27,10 @@ export default function Home() {
       }}>
         <SideBar />
               <h1 className='text-5xl'>Welcome to Next</h1>
-
-        <AddStops/>
-      <AddCity/>
-      <AddLine/>
-      <ChatRoom/>
-      <h2>users</h2>
-      <UsersManagment/>
-      <Posts/>
+              
+        <Layout/>
+        
       </div>
-      {/*  */}
     </div>
   )
 }
