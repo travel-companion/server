@@ -17,7 +17,7 @@ function Chat() {
           
         }}>
           <SideBar/>
-                <h1 className='text-5xl'>Welcome to Next</h1>
+                <h1 className='text-5xl'>chat room</h1>
                 <div>
             
           <ChatRoom/>
