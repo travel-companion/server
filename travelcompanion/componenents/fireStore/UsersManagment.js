@@ -13,11 +13,11 @@ function UsersManagment() {
     const getAll = async () => {
         try {
 
-            const q = query(collection(db, "users"));
+            const q = query(collection(db, "UserData"));
             const querySnapshot = await getDocs(q);
             var arr = []
             querySnapshot.forEach((doc) => {
-                    arr.push({ data: doc.data(), id: doc.id })
+                    arr.push({ data: doc.data(), id: doc.data().uid })
                 setUsers(arr);
             });
         } catch (error) {
@@ -27,17 +27,17 @@ function UsersManagment() {
 
 
     const neutral=(id)=>{
-        const user = doc(db, 'users', id);
+        const user = doc(db, 'UserData', id);
         updateDoc(user, { state: "neutral" });
         setUpdate(!update)
     }
     const ban=(id)=>{
-        const user = doc(db, 'users', id);
+        const user = doc(db, 'UserData', id);
         updateDoc(user, { state: "banned" });
         setUpdate(!update)
     }
     const mute=(id)=>{
-        const user = doc(db, 'users', id);
+        const user = doc(db, 'UserData', id);
         updateDoc(user, { state: "muted" });
         setUpdate(!update)
     }
@@ -45,41 +45,33 @@ function UsersManagment() {
 
 
     return (
-        <div>
-            <table style={{ border: 'solid 1px black' }}>
-                <thead>
-                    <tr> 
+        <div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden"></div>
+       
+            <table   class="min-w-full text-center  absolute inset-x-0 top-30 left-20 h-16	 ">
+                <thead   class="border-b bg-gray-800 ">
+                    <tr scope="col" class="text-sm font-medium text-gray-900  px-6 py-4 text-left  " > 
                             <th
-                                style={{
-                                    borderBottom: 'solid 3px red',
-                                    color: 'black',
-                                }}
+                                scope="col" class="text-sm font-medium text-center text-white px-6 py-4 border-separate border-spacing-2 border border-slate-500 "
                             >
-                                id
+                                User ID
                             </th>
                             <th
-                                style={{
-                                    borderBottom: 'solid 3px red',
-                                    color: 'black',
-                                }}
+                                scope="col" class="text-sm font-medium text-center text-white px-6 py-4 border-separate border-spacing-2 border border-slate-500 "
                             >
-                                name
+                                Name
                             </th>
                             <th
-                                style={{
-                                    borderBottom: 'solid 3px red',
-                                    color: 'black',
-                                }}
+                                scope="col" class="text-sm font-medium text-center text-white px-6 py-4 border-separate border-spacing-2 border border-slate-500"
                             >
-                                role
+                                Role
                             </th>
                             <th
-                                style={{
-                                    borderBottom: 'solid 3px red',
-                                    color: 'black',
-                                }}
+                                scope="col" class="text-sm font-medium text-center text-white px-6 py-4 border-separate border-spacing-2 border border-slate-500"
                             >
-                                state
+                                State
                             </th>
                      </tr>
                 </thead>
@@ -97,11 +89,12 @@ function UsersManagment() {
                         </td>
                         <td
                             style={{
+                                border:"border-spacing-2",
                                 padding: '10px',
                                 border: 'solid 1px gray',
                             }}
                         >
-                            {e.data.userName}
+                            {e.data.name}
                         </td>
                         <td
                             style={{
@@ -122,15 +115,15 @@ function UsersManagment() {
                         <td
                             style={{
                                 padding: '10px',
-                                border: 'solid 1px gray',
+                                border: 'solid 1px white',
                             }}
                         >
                             {!(e.data.state==="banned")?
-                            <button onClick={()=>{ban(e.id)}}>ban</button>:
-                            <button onClick={()=>{neutral(e.id)}}>deban</button>} 
+                            <button  className="inline-block px-6 py-2 border-2 border-blue-600 space-x-6 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" onClick={()=>{ban(e.id)}}>ban</button>: 
+                            <button className="inline-block px-6 py-2 border-2 border-yellow-500 text-yellow-500 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out " onClick={()=>{neutral(e.id)}}>deban</button>} 
                             {!(e.data.state==="muted")?
-                            <button onClick={()=>{mute(e.id)}}>mute</button>:
-                            <button onClick={()=>{neutral(e.id)}}>demute</button>}
+                            <button  class="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" onClick={()=>{mute(e.id)}}>mute</button>:
+                            <button className="inline-block px-6 py-2 border-2 border-yellow-500 text-yellow-500 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" onClick={()=>{neutral(e.id)}}>demute</button>}
 
                         </td>
                     </tr>
@@ -139,6 +132,9 @@ function UsersManagment() {
                 </tbody>
             </table>
         </div>
+        </div>
+        </div>
+
     )
 }
 

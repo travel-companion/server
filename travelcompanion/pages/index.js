@@ -14,7 +14,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>adminTC</title>
-        <meta name='description' content='admin Travel Compagnion ' />
+        <meta name='description' content='admin Travel Companion ' />
       </Head>
       
       <div style={{
@@ -26,7 +26,7 @@ export default function Home() {
         
       }}>
         <SideBar />
-              <h1 className='text-5xl'>Welcome to Next</h1>
+              <h1 className='text-5xl'>Welcome to Travel Companion</h1>
               
         <Layout/>
         
