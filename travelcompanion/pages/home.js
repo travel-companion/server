@@ -26,7 +26,7 @@ import Link from 'next/link'
         
        }}>
          <SideBar />
-               <h1 className='text-5xl'>Welcome to Travel Companion</h1>
+               <h1 className='text-5xl text-center text-amber-600 mb-2'>Welcome to Travel Companion dashboard</h1>
               
         <Layout/>
         
