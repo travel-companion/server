@@ -79,23 +79,28 @@ function AddLine() {
     return (
         <div>
 
-            <input  className="border py-2 px-10 text-grey-darkest"
-            onChange={(e) => setRef(e.target.value)} type='text' placeholder="ref" />
-            <select 
+            <input  className="border py-2 px-14 text-grey-darkest"
+            onChange={(e) => setRef(e.target.value)} type='text' placeholder="Line" /> <br/>
+          <span className="text-base font-medium text-gray-900  px-6 py-4 hover:font-bold"> 🔘 Departure station:</span> 
+          <select 
              onChange={(e) => setDeprat(JSON.parse(e.target.value))} name="type" id="depart">
-                {
+                { 
                     allStops.map((e, i) => {
                         return <option value={JSON.stringify({ id: e.id, name: e.data.name })} key={i}>{e.data.name}</option>
                     })
                 }
             </select>
+             <br/>
+            <span  className="text-base	 font-medium text-gray-900  px-6 py-4 hover:font-bold"> ⚫️ Arrival station        :</span> 
             <select onChange={(e) => setDest(JSON.parse(e.target.value))} name="type" id="destination">
                 {
                     allStops.map((e, i) => {
                         return <option value={JSON.stringify({ id: e.id, name: e.data.name })} key={i}>{e.data.name}</option>
                     })
                 }
-            </select>
+            </select    > 
+            <br/>
+            <span  className="text-base font-medium text-gray-900  px-6 py-4 hover:font-bold">🔴 Stops        :</span> 
             <select onChange={(e) => setOneStop(JSON.parse(e.target.value))} name="type" id="type-select">
                 {
                     allStops.map((e, i) => {
