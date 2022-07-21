@@ -28,7 +28,7 @@ function SideBar() {
               Admin Dashboard
             </h1>
             <div className=" my-4 border-b border-gray-100 pb-4">
-              <Link href="/">
+              <Link href="">
                   <a className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                     <MdOutlineSpaceDashboard className="text-2xl text-white group-hover:text-white " />
                     <h3 className="text-base text-white group-hover:text-amber-300 font-semibold ">
@@ -90,7 +90,7 @@ function SideBar() {
                 </h3>
               </div>
             </div>
-            {/* logout */}
+            <Link href="/">
             <div className=" my-4">
               <div className="flex mb-2 justify-start items-center gap-4 pl-5 border border-gray-200  hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                 <MdOutlineLogout className="text-2xl text-gray-600 group-hover:text-white " />
@@ -99,6 +99,7 @@ function SideBar() {
                 </h3>
               </div>
             </div>
+            </Link>
           </div>
         </div>
       </Disclosure>
